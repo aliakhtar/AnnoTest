@@ -20,6 +20,7 @@ import com.github.annoTest.annotation.PrintMe;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
@@ -39,5 +40,11 @@ public class PrintMeProcessor extends AbstractProcessor
                     .printMessage(Diagnostic.Kind.NOTE, e.getSimpleName().toString());
         }
         return true;
+    }
+
+    @Override
+    public SourceVersion getSupportedSourceVersion()
+    {
+        return SourceVersion.latestSupported();
     }
 }
