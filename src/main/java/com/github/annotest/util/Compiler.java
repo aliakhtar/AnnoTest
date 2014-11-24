@@ -34,19 +34,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Compiler {
-
-    private static List<String> classPathEntries = Lists.newArrayList();
-    static
-    {
-        classPathEntries.add(classPathFor(Compiler.class));
-    }
-
+public class Compiler
+{
     private final File sourceDir, outputDir;
     private final List<String> options;
 
-    public Compiler() throws IOException
+    private final List<String> classPaths;
+
+    public Compiler(Class... classPathEntries) throws IOException
     {
+        classPaths = new ArrayList<>( classPathEntries.length + 1 );
+        classPaths.add( classPathFor(Compiler.class) );
+
+        for (Class clazz : classPathEntries)
+        {
+            classPaths.add( classPathFor(clazz) );
+        }
+
         sourceDir = createTempDir("sourceDir");
         outputDir = createTempDir("outputDir");
 
@@ -86,21 +90,23 @@ public class Compiler {
             files[i] = writeSourceFile(sourceFiles[i]);
         }
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
-        Iterable<? extends JavaFileObject> javaFileObjects = fileManager.getJavaFileObjects(files);
+        StandardJavaFileManager fileManager =
+                compiler.getStandardFileManager(null, null, null);
+        Iterable<? extends JavaFileObject> javaFileObjects =
+                fileManager.getJavaFileObjects(files);
         CompilationTask compilationTask =
                 compiler.getTask(null, null, null, options, null, javaFileObjects);
-        if (processor != null) {
+        if (processor != null)
             compilationTask.setProcessors(Arrays.asList(processor));
-        }
+
         Boolean success = compilationTask.call();
         fileManager.close();
         return success;
     }
 
-    private static String buildClassPath(File outputDir)
+    private String buildClassPath(File outputDir)
     {
-        ArrayList<String> classPathElements = Lists.newArrayList(classPathEntries);
+        ArrayList<String> classPathElements = Lists.newArrayList(classPaths);
         classPathElements.add(outputDir.getAbsolutePath());
         return Joiner.on(System.getProperty("path.separator")).join(classPathElements);
     }
