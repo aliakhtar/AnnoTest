@@ -13,13 +13,15 @@ This project provides some utility classes to make it easier to
  To test the code, simply make a unit test, extend it from `AnnoTest`, and pass in
  your processor to the constructor. E.g:
 
-    class ExampleTest extends AnnoTest
+```java
+class ExampleTest extends AnnoTest
+{
+    public ExampleTest() throws Exception
     {
-        public ExampleTest() throws Exception
-        {
-            super( new ExampleProcessor() );
-        }
+        super( new ExampleProcessor() );
     }
+}
+```
 
 To pass in classes which will be added to the compiler's classpath
 (via `-classpath`), just pass them in through the second argument. E.g:
