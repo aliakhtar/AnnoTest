@@ -19,7 +19,8 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-class ToStringMatcher<T> extends BaseMatcher<T> {
+public class ToStringMatcher<T> extends BaseMatcher<T>
+{
     /**
      * @param <T> The type of the argument being matched
      * @param expecteed the expected toString value for the object
