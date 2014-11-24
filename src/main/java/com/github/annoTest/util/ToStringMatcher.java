@@ -14,7 +14,7 @@
  */
 
 //Courtesy of https://github.com/irobertson/jpa-annotation-processor
-package com.github.annotest.util;
+package com.github.annoTest.util;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

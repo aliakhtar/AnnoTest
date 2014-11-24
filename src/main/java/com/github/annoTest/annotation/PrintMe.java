@@ -13,8 +13,8 @@
  * the License.
  */
 
-package com.github.annotest.annotation;
+package com.github.annoTest.annotation;
 
-public @interface EnforceNoArgConstructor
+public @interface PrintMe
 {
 }
