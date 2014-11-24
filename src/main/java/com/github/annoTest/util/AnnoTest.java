@@ -15,6 +15,7 @@
 
 package com.github.annoTest.util;
 
+import org.junit.After;
 import org.mockito.Mockito;
 
 import javax.annotation.processing.Messager;
@@ -32,5 +33,12 @@ public abstract class AnnoTest
         messager = Mockito.mock(Messager.class);
         this.processor = new ProcessorWrapper(processor, messager);
         compiler = new Compiler(classPathEntries);
+    }
+
+
+    @After
+    public void tearDown()
+    {
+        compiler.cleanUp();
     }
 }
