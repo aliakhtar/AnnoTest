@@ -44,5 +44,4 @@ public class PrintMeProcessorTest extends AnnoTest
         Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "PrintMeTest");
         Mockito.verifyNoMoreInteractions(messager);
     }
-
 }
