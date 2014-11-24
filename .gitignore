@@ -1,2 +1,5 @@
 target/*
 pom.xml
+deploy.sh
+maven-central-deploy.log
+.idea/workspace.xml
