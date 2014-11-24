@@ -30,7 +30,8 @@ To pass in classes which will be added to the compiler's classpath
 super( new ExampleProcessor(), Foo.class, Bar.class);
 ```
 
- **Complete Example**:
+ Complete Example:
+ -----------------
 
  Here's how to unit test a simple annotation: `@PrintMe`
  and its processor: `PrintMeProcessor`. The processor just prints the
@@ -85,7 +86,8 @@ public class PrintMeProcessorTest extends AnnoTest
         Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "PrintMeTest");
         Mockito.verifyNoMoreInteractions(messager);
     }
-}```
+}
+```
 
 In the above example, `compiler` is a utility class with methods for calling
 `javax.tools.JavaCompiler`. `messager` is a mock of the
