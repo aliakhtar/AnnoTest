@@ -26,7 +26,9 @@ class ExampleTest extends AnnoTest
 To pass in classes which will be added to the compiler's classpath
 (via `-classpath`), just pass them in through the second argument. E.g:
 
-    super( new ExampleProcessor(), Foo.class, Bar.class);
+```java
+super( new ExampleProcessor(), Foo.class, Bar.class);
+```
 
  **Complete Example**:
 
@@ -37,50 +39,53 @@ To pass in classes which will be added to the compiler's classpath
 
 1) The annotation:
 
-     public @interface PrintMe {}
-
+```java
+ public @interface PrintMe {}
+```
 
 2) The processor:
 
-     @SupportedAnnotationTypes("com.github.annoTest.annotation.PrintMe")
-     public class PrintMeProcessor extends AbstractProcessor
+```java
+ @SupportedAnnotationTypes("com.github.annoTest.annotation.PrintMe")
+ public class PrintMeProcessor extends AbstractProcessor
+ {
+     @Override
+     public boolean process(Set<? extends TypeElement> annotations,
+                            RoundEnvironment roundEnv)
      {
-         @Override
-         public boolean process(Set<? extends TypeElement> annotations,
-                                RoundEnvironment roundEnv)
+         for (Element e : roundEnv.getElementsAnnotatedWith(PrintMe.class))
          {
-             for (Element e : roundEnv.getElementsAnnotatedWith(PrintMe.class))
-             {
-                 processingEnv.getMessager()
-                         .printMessage(Diagnostic.Kind.NOTE, e.getSimpleName().toString());
-             }
-             return true;
+             processingEnv.getMessager()
+                     .printMessage(Diagnostic.Kind.NOTE, e.getSimpleName().toString());
          }
+         return true;
      }
-
+ }
+```
 
 3) Unit test:
 
-    public class PrintMeProcessorTest extends AnnoTest
+```java
+public class PrintMeProcessorTest extends AnnoTest
+{
+    public PrintMeProcessorTest() throws Exception
     {
-        public PrintMeProcessorTest() throws Exception
-        {
-            super(new PrintMeProcessor());
-        }
-
-        @Test
-        public void testProcess() throws Exception
-        {
-            SourceFile testFile = new SourceFile(
-                          "PrintMeTest.java",
-                          "@com.github.annoTest.annotation.PrintMe",
-                          "public class PrintMeTest {}"
-                        );
-            assertTrue( compiler.compileWithProcessor(processor, testFile) );
-            Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "PrintMeTest");
-            Mockito.verifyNoMoreInteractions(messager);
-        }
+        super(new PrintMeProcessor());
     }
+
+    @Test
+    public void testProcess() throws Exception
+    {
+        SourceFile testFile = new SourceFile(
+                      "PrintMeTest.java",
+                      "@com.github.annoTest.annotation.PrintMe",
+                      "public class PrintMeTest {}"
+                    );
+        assertTrue( compiler.compileWithProcessor(processor, testFile) );
+        Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "PrintMeTest");
+        Mockito.verifyNoMoreInteractions(messager);
+    }
+}```
 
 In the above example, `compiler` is a utility class with methods for calling
 `javax.tools.JavaCompiler`. `messager` is a mock of the
