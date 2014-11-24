@@ -15,14 +15,40 @@
 
 package com.github.annoTest.processor;
 
+import com.github.annoTest.annotation.PrintMe;
+import com.github.annoTest.util.AnnoTest;
+import com.github.annoTest.util.SourceFile;
+import org.junit.After;
 import org.junit.Test;
 
-public class PrintMeProcessorTest
+import static org.junit.Assert.assertTrue;
+
+public class PrintMeProcessorTest extends AnnoTest
 {
+
+    public PrintMeProcessorTest() throws Exception
+    {
+        super(new PrintMeProcessor(), PrintMe.class);
+    }
 
     @Test
     public void testProcess() throws Exception
     {
+        SourceFile[] sourceFiles =
+        {
+           new SourceFile(
+             "SimpleAnnotated.java",
+             "@" + PrintMe.class.getCanonicalName(),
+             "public class SimpleAnnotated {",
+             "}")
+        };
 
+        assertTrue( compiler.compileWithProcessor(processor, sourceFiles) );
+    }
+
+    @After
+    public void tearDown() throws Exception
+    {
+        compiler.cleanUp();
     }
 }
