@@ -20,6 +20,10 @@ import com.github.annoTest.util.AnnoTest;
 import com.github.annoTest.util.SourceFile;
 import org.junit.After;
 import org.junit.Test;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+
+import javax.tools.Diagnostic;
 
 import static org.junit.Assert.assertTrue;
 
@@ -37,13 +41,19 @@ public class PrintMeProcessorTest extends AnnoTest
         SourceFile[] sourceFiles =
         {
            new SourceFile(
-             "SimpleAnnotated.java",
+             "PrintMeTest.java",
              "@" + PrintMe.class.getCanonicalName(),
-             "public class SimpleAnnotated {",
+             "public class PrintMeTest {",
              "}")
         };
-
         assertTrue( compiler.compileWithProcessor(processor, sourceFiles) );
+
+        String test = "PrintMeTest";
+        Mockito.verify(messager).printMessage(
+             Matchers.eq(Diagnostic.Kind.NOTE),
+             Matchers.eq(test)
+         );
+        Mockito.verifyNoMoreInteractions(messager);
     }
 
     @After
