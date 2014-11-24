@@ -15,6 +15,4 @@
 
 package com.github.annoTest.annotation;
 
-public @interface PrintMe
-{
-}
+public @interface PrintMe {}

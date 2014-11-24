@@ -15,7 +15,6 @@
 
 package com.github.annoTest.processor;
 
-import com.github.annoTest.annotation.PrintMe;
 import com.github.annoTest.util.AnnoTest;
 import com.github.annoTest.util.SourceFile;
 import org.junit.Test;
@@ -36,15 +35,12 @@ public class PrintMeProcessorTest extends AnnoTest
     @Test
     public void testProcess() throws Exception
     {
-        SourceFile[] sourceFiles =
-        {
-           new SourceFile(
-             "PrintMeTest.java",
-             "@" + PrintMe.class.getCanonicalName(),
-             "public class PrintMeTest {",
-             "}")
-        };
-        assertTrue( compiler.compileWithProcessor(processor, sourceFiles) );
+        SourceFile testFile = new SourceFile(
+                      "PrintMeTest.java",
+                      "@com.github.annoTest.annotation.PrintMe",
+                      "public class PrintMeTest {}"
+                    );
+        assertTrue( compiler.compileWithProcessor(processor, testFile) );
         Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "PrintMeTest");
         Mockito.verifyNoMoreInteractions(messager);
     }
