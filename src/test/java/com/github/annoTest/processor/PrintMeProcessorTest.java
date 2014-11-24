@@ -32,7 +32,7 @@ public class PrintMeProcessorTest extends AnnoTest
 
     public PrintMeProcessorTest() throws Exception
     {
-        super(new PrintMeProcessor(), PrintMe.class);
+        super(new PrintMeProcessor());
     }
 
     @Test
