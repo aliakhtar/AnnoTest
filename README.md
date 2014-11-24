@@ -30,8 +30,7 @@ To pass in classes which will be added to the compiler's classpath
 super( new ExampleProcessor(), Foo.class, Bar.class);
 ```
 
- Complete Example:
- -----------------
+## Complete Example:
 
  Here's how to unit test a simple annotation: `@PrintMe`
  and its processor: `PrintMeProcessor`. The processor just prints the
