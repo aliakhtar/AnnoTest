@@ -83,8 +83,8 @@ To pass in classes which will be added to the compiler's classpath
 In the above example, `compiler` is a utility class with methods for calling
 `javax.tools.JavaCompiler`. `messager` is a mock of the
 `javax.annotation.processing.Messager` which is passed to your processor,
- when it calls `processingEnv.getMessager`. A 3rd field,
+ when it calls `processingEnv.getMessager()`. A 3rd field,
 `processor`, is a wrapper around `javax.annotation.processing.Processor`. This
 is the `processingEnv` which is sent to the processor by the `Compiler`.
 
-All three of these protected variables are set by the `AnnoTest` class.
+All three of these protected variables are set by the `AnnoTest`.
