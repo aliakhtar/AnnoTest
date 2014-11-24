@@ -2,20 +2,20 @@
 
 This project provides some utility classes to make it easier to
  unit test Java annotation processors. This is done by using
- `javax.tools.JavaCompiler` to invoke the compiler, and compile a test
- class which contains your chosen annotations. This allows the
- processor to be tested, even when `-proc:none` is passed to the compiler.
+ `javax.tools.JavaCompiler` to invoke the compiler, and compile one or more test
+ classes which contains your annotations. This allows the
+ processor to be tested, even when `-proc:none` is set.
 
  The classes are taken from
  [https://github.com/irobertson/jpa-annotation-processor](https://github.com/irobertson/jpa-annotation-processor),
- improved, and modernized a bit, to work with newer versions of the dependencies.
+ improved, and modernized a bit.
 
  To test the code, simply make a unit test, extend it from `AnnoTest`, and pass in
  your processor to the constructor. E.g:
 
     class ExampleTest extends AnnoTest
     {
-        public ExampleTest()
+        public ExampleTest() throws Exception
         {
             super( new ExampleProcessor() );
         }
@@ -28,8 +28,8 @@ To pass in classes which will be added to the compiler's classpath
 
  **Complete Example**:
 
- Here's a complete example of how to unit test a simple annotation, `@PrintMe`
- and its processor, `PrintMeProcessor`. The processor just prints the
+ Here's how to unit test a simple annotation: `@PrintMe`
+ and its processor: `PrintMeProcessor`. The processor just prints the
  name of whichever element contains the `@PrintMe` annotation.
 
 
@@ -49,7 +49,6 @@ To pass in classes which will be added to the compiler's classpath
          {
              for (Element e : roundEnv.getElementsAnnotatedWith(PrintMe.class))
              {
-                //Just print the element which has the annotation:
                  processingEnv.getMessager()
                          .printMessage(Diagnostic.Kind.NOTE, e.getSimpleName().toString());
              }
@@ -62,7 +61,6 @@ To pass in classes which will be added to the compiler's classpath
 
     public class PrintMeProcessorTest extends AnnoTest
     {
-
         public PrintMeProcessorTest() throws Exception
         {
             super(new PrintMeProcessor());
@@ -81,3 +79,12 @@ To pass in classes which will be added to the compiler's classpath
             Mockito.verifyNoMoreInteractions(messager);
         }
     }
+
+In the above example, `compiler` is a utility class with methods for calling
+`javax.tools.JavaCompiler`. `messager` is a mock of the
+`javax.annotation.processing.Messager` which is passed to your processor,
+ when it calls `processingEnv.getMessager`. A 3rd field,
+`processor`, is a wrapper around `javax.annotation.processing.Processor`. This
+is the `processingEnv` which is sent to the processor by the `Compiler`.
+
+All three of these protected variables are set by the `AnnoTest` class.
