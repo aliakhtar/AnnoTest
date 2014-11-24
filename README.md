@@ -3,7 +3,7 @@
 This project provides some utility classes to make it easier to
  unit test Java annotation processors. This is done by using
  `javax.tools.JavaCompiler` to invoke the compiler, and compile one or more test
- classes which contains your annotations. This allows the
+ classes which contain your annotations. This allows the
  processor to be tested, even when `-proc:none` is set.
 
  The classes are taken from
