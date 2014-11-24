@@ -13,7 +13,7 @@
  * the License.
  */
 
-package com.github.annoTest.util;
+package com.github.aliakhtar.annoTest.util;
 
 import org.junit.After;
 import org.mockito.Mockito;

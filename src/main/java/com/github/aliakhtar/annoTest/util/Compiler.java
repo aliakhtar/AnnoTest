@@ -14,7 +14,7 @@
  */
 
 //Courtesy of https://github.com/irobertson/jpa-annotation-processor
-package com.github.annoTest.util;
+package com.github.aliakhtar.annoTest.util;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;

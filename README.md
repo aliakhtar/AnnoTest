@@ -46,7 +46,7 @@ super( new ExampleProcessor(), Foo.class, Bar.class);
 2) The processor:
 
 ```java
- @SupportedAnnotationTypes("com.github.annoTest.annotation.PrintMe")
+ @SupportedAnnotationTypes("com.github.aliakhtar.annoTest.annotation.PrintMe")
  public class PrintMeProcessor extends AbstractProcessor
  {
      @Override
@@ -78,7 +78,7 @@ public class PrintMeProcessorTest extends AnnoTest
     {
         SourceFile testFile = new SourceFile(
                       "PrintMeTest.java",
-                      "@com.github.annoTest.annotation.PrintMe",
+                      "@com.github.aliakhtar.annoTest.annotation.PrintMe",
                       "public class PrintMeTest {}"
                     );
         assertTrue( compiler.compileWithProcessor(processor, testFile) );

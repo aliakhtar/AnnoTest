@@ -13,6 +13,6 @@
  * the License.
  */
 
-package com.github.annoTest.annotation;
+package com.github.aliakhtar.annoTest.annotation;
 
 public @interface PrintMe {}

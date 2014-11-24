@@ -13,9 +13,9 @@
  * the License.
  */
 
-package com.github.annoTest.processor;
+package com.github.aliakhtar.annoTest.processor;
 
-import com.github.annoTest.annotation.PrintMe;
+import com.github.aliakhtar.annoTest.annotation.PrintMe;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
@@ -27,7 +27,7 @@ import javax.tools.Diagnostic;
 import java.util.Set;
 
 
-@SupportedAnnotationTypes("com.github.annoTest.annotation.PrintMe")
+@SupportedAnnotationTypes("com.github.aliakhtar.annoTest.annotation.PrintMe")
 public class PrintMeProcessor extends AbstractProcessor
 {
     @Override

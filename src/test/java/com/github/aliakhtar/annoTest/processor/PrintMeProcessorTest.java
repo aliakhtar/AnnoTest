@@ -13,10 +13,10 @@
  * the License.
  */
 
-package com.github.annoTest.processor;
+package com.github.aliakhtar.annoTest.processor;
 
-import com.github.annoTest.util.AnnoTest;
-import com.github.annoTest.util.SourceFile;
+import com.github.aliakhtar.annoTest.util.AnnoTest;
+import com.github.aliakhtar.annoTest.util.SourceFile;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -36,7 +36,7 @@ public class PrintMeProcessorTest extends AnnoTest
     {
         SourceFile testFile = new SourceFile(
                       "PrintMeTest.java",
-                      "@com.github.annoTest.annotation.PrintMe",
+                      "@com.github.aliakhtar.annoTest.annotation.PrintMe",
                       "public class PrintMeTest {}"
                     );
         assertTrue( compiler.compileWithProcessor(processor, testFile) );
