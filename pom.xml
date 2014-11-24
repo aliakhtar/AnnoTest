@@ -22,14 +22,14 @@
     <name>AnnoTest</name>
     <description>Utility classes for testing annotation processors.</description>
     <url>https://github.com/aliakhtar/AnnoTest</url>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
 
     <scm>
         <connection>scm:git:git@github.com:aliakhtar/AnnoTest.git</connection>
         <developerConnection>scm:git:git@github.com:aliakhtar/AnnoTest.git</developerConnection>
         <url>https://github.com/aliakhtar/AnnoTest</url>
-      <tag>HEAD</tag>
+      <tag>anno-test-1.1.1</tag>
   </scm>
 
     <licenses>
