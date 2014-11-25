@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cf19f87d-37eb-4106-954d-ff6ad9424c9b" name="Default" comment="minor">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/services/javax.annotation.processing.Processor" />
+    <list default="true" id="cf19f87d-37eb-4106-954d-ff6ad9424c9b" name="Default" comment="Added processor file to META-INF">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="AnnoTest.iws" />
@@ -667,7 +666,7 @@
       <workItem from="1416860283702" duration="8035000" />
       <workItem from="1416928018322" duration="772000" />
       <workItem from="1416934215459" duration="2827000" />
-      <workItem from="1416953909473" duration="176000" />
+      <workItem from="1416953909473" duration="236000" />
     </task>
     <task id="LOCAL-00001" summary="Created project.">
       <created>1416796041019</created>
@@ -861,11 +860,17 @@
       <option name="project" value="LOCAL" />
       <updated>1416937410382</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Added processor file to META-INF">
+      <created>1416954098096</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1416954098096</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28808000" />
+    <option name="totallyTimeSpent" value="28868000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1024" height="743" extended-state="0" />
@@ -916,7 +921,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Changed to take classPath entries via constructor argument rather than hard-coded as static entries." />
     <MESSAGE value="Added PrintMe and PrintMeProcessor" />
     <MESSAGE value="Added abstract AnnoTest for other test classes to extend from." />
     <MESSAGE value="Added PrintMeProcessorTest.java" />
@@ -941,7 +945,8 @@
     <MESSAGE value="Whatever" />
     <MESSAGE value="Fixed .gitignore" />
     <MESSAGE value="minor" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor" />
+    <MESSAGE value="Added processor file to META-INF" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added processor file to META-INF" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
