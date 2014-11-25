@@ -24,6 +24,7 @@ import javax.tools.Diagnostic;
 
 import static org.junit.Assert.assertTrue;
 
+
 public class PrintMeProcessorTest extends AnnoTest
 {
     public PrintMeProcessorTest() throws Exception

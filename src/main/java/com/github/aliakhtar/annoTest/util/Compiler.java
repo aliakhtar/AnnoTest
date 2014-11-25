@@ -86,7 +86,8 @@ public class Compiler
             throws Exception
     {
         File[] files = new File[sourceFiles.length];
-        for (int i = 0; i < sourceFiles.length; i++) {
+        for (int i = 0; i < sourceFiles.length; i++)
+        {
             files[i] = writeSourceFile(sourceFiles[i]);
         }
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
