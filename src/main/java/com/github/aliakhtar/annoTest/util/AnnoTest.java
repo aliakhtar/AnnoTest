@@ -21,17 +21,17 @@ import org.mockito.Mockito;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.Processor;
 
-public abstract class AnnoTest
+public abstract class AnnoTest<P extends Processor>
 {
     protected final Messager messager;
-    protected final ProcessorWrapper processor;
+    protected final ProcessorWrapper<P> processor;
     protected final Compiler compiler;
 
-    public AnnoTest(Processor processor, Class... classPathEntries)
+    public AnnoTest(P processor, Class... classPathEntries)
             throws Exception
     {
         messager = Mockito.mock(Messager.class);
-        this.processor = new ProcessorWrapper(processor, messager);
+        this.processor = new ProcessorWrapper<>(processor, messager);
         compiler = new Compiler(classPathEntries);
     }
 

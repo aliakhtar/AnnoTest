@@ -14,7 +14,7 @@ This project provides some utility classes to make it easier to
  your processor to the constructor. E.g:
 
 ```java
-class ExampleTest extends AnnoTest
+class ExampleTest extends AnnoTest<ExampleProcessor>
 {
     public ExampleTest() throws Exception
     {
@@ -66,7 +66,7 @@ super( new ExampleProcessor(), Foo.class, Bar.class);
 3) Unit test:
 
 ```java
-public class PrintMeProcessorTest extends AnnoTest
+public class PrintMeProcessorTest extends AnnoTest<PrintMeProcessor>
 {
     public PrintMeProcessorTest() throws Exception
     {
@@ -92,7 +92,9 @@ In the above example, `compiler` is a utility class with methods for calling
 `javax.tools.JavaCompiler`. `messager` is a mock of the
 `javax.annotation.processing.Messager` which is passed to your processor,
  when it calls `processingEnv.getMessager()`. A 3rd field,
-`processor`, is a wrapper around `javax.annotation.processing.Processor`. This
-is the `processingEnv` which is sent to the processor by the `Compiler`.
+`processor`, is a wrapper around your annotation processor, which does
+`Mockito.spy()` on the processingEnv, to monitor any messages which are logged.
+ Use `processor.getWrapped()` to get your actual processor instance, in a
+ compile safe way.
 
 All three of these protected variables are set by the `AnnoTest`.

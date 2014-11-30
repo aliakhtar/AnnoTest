@@ -31,9 +31,9 @@ import java.util.Set;
  * returned from {@link ProcessingEnvironment#getMessager()} with a provided
  * mock Messager.
  */
-public class ProcessorWrapper implements Processor
+public class ProcessorWrapper<P extends Processor> implements Processor
 {
-    private final Processor wrapped;
+    private final P wrapped;
     private final Messager mockMessager;
 
     @Override
@@ -44,7 +44,7 @@ public class ProcessorWrapper implements Processor
         wrapped.init(spy);
     }
 
-    public ProcessorWrapper(Processor wrapped, Messager mockMessager)
+    public ProcessorWrapper(P wrapped, Messager mockMessager)
     {
         this.wrapped = wrapped;
         this.mockMessager = mockMessager;
@@ -80,5 +80,10 @@ public class ProcessorWrapper implements Processor
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv)
     {
         return wrapped.process(annotations, roundEnv);
+    }
+
+    public P getWrapped()
+    {
+        return wrapped;
     }
 }
