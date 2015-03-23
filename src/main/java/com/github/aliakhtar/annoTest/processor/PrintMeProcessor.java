@@ -17,19 +17,28 @@ package com.github.aliakhtar.annoTest.processor;
 
 import com.github.aliakhtar.annoTest.annotation.PrintMe;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
+import java.util.Map;
 import java.util.Set;
 
 
 @SupportedAnnotationTypes("com.github.aliakhtar.annoTest.annotation.PrintMe")
+@SupportedOptions("processor.parameter.one")
 public class PrintMeProcessor extends AbstractProcessor
 {
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv)
+    {
+        super.init(processingEnv);
+        for (Map.Entry<String, String> entry : processingEnv.getOptions().entrySet()) {
+            processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, entry.getKey() + ":" + entry.getValue());
+        }
+    }
+
     @Override
     public boolean process(Set<? extends TypeElement> annotations,
                            RoundEnvironment roundEnv)
