@@ -44,4 +44,19 @@ public class PrintMeProcessorTest extends AnnoTest<PrintMeProcessor>
         Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "PrintMeTest");
         Mockito.verifyNoMoreInteractions(messager);
     }
+
+    @Test
+    public void testParameter() throws Exception
+    {
+        SourceFile testFile = new SourceFile(
+                "ParameterTest.java",
+                "@com.github.aliakhtar.annoTest.annotation.PrintMe",
+                "public class ParameterTest{}"
+        );
+        compiler.putParameter("processor.parameter.one", "parameterValue");
+        assertTrue(compiler.compileWithProcessor(processor, testFile));
+        Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "processor.parameter.one:parameterValue");
+        Mockito.verify(messager).printMessage(Diagnostic.Kind.NOTE, "ParameterTest");
+        Mockito.verifyNoMoreInteractions(messager);
+    }
 }

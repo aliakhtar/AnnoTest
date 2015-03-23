@@ -33,13 +33,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Compiler
 {
     private final File sourceDir, outputDir;
-    private final List<String> options;
 
     private final List<String> classPaths;
+
+    private Map<String, String> parameterMap = new HashMap<>();
 
     public Compiler(Class... classPathEntries) throws IOException
     {
@@ -54,10 +57,6 @@ public class Compiler
         sourceDir = createTempDir("sourceDir");
         outputDir = createTempDir("outputDir");
 
-        Builder<String> builder = ImmutableList.builder();
-        builder.add("-classpath").add(buildClassPath(outputDir));
-        builder.add("-d").add(outputDir.getAbsolutePath());
-        this.options = builder.build();
     }
 
     public File getOutputDir()
@@ -85,6 +84,14 @@ public class Compiler
     private boolean compile(Processor processor, SourceFile... sourceFiles)
             throws Exception
     {
+        Builder<String> builder = ImmutableList.builder();
+        builder.add("-classpath").add(buildClassPath(outputDir));
+        builder.add("-d").add(outputDir.getAbsolutePath());
+
+        for (Map.Entry<String, String> entry : parameterMap.entrySet()) {
+            builder.add("-A" + entry.getKey() + "=" + entry.getValue());
+        }
+
         File[] files = new File[sourceFiles.length];
         for (int i = 0; i < sourceFiles.length; i++)
         {
@@ -96,7 +103,7 @@ public class Compiler
         Iterable<? extends JavaFileObject> javaFileObjects =
                 fileManager.getJavaFileObjects(files);
         CompilationTask compilationTask =
-                compiler.getTask(null, null, null, options, null, javaFileObjects);
+                compiler.getTask(null, null, null, builder.build(), null, javaFileObjects);
         if (processor != null)
             compilationTask.setProcessors(Arrays.asList(processor));
 
@@ -134,5 +141,20 @@ public class Compiler
             throw new IOException("Unable to create temp directory " + file.getAbsolutePath());
         }
         return file;
+    }
+
+    public void putParameter(String key, String value)
+    {
+        parameterMap.put(key, value);
+    }
+
+    public void removeParameter(String key)
+    {
+        parameterMap.remove(key);
+    }
+
+    public void clearParameterMap()
+    {
+        parameterMap = new HashMap<>();
     }
 }
