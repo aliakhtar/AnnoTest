@@ -88,7 +88,8 @@ public class Compiler
         builder.add("-classpath").add(buildClassPath(outputDir));
         builder.add("-d").add(outputDir.getAbsolutePath());
 
-        for (Map.Entry<String, String> entry : parameterMap.entrySet()) {
+        for (Map.Entry<String, String> entry : parameterMap.entrySet())
+        {
             builder.add("-A" + entry.getKey() + "=" + entry.getValue());
         }
 
@@ -97,6 +98,7 @@ public class Compiler
         {
             files[i] = writeSourceFile(sourceFiles[i]);
         }
+
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager =
                 compiler.getStandardFileManager(null, null, null);

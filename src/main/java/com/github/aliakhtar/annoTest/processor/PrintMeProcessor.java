@@ -34,7 +34,8 @@ public class PrintMeProcessor extends AbstractProcessor
     public synchronized void init(ProcessingEnvironment processingEnv)
     {
         super.init(processingEnv);
-        for (Map.Entry<String, String> entry : processingEnv.getOptions().entrySet()) {
+        for (Map.Entry<String, String> entry : processingEnv.getOptions().entrySet())
+        {
             processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, entry.getKey() + ":" + entry.getValue());
         }
     }
